@@ -1,10 +1,11 @@
 package jroadie.jsondata;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-public class JSONObject extends AbstractJSONData<JSONObject> {
+public class JSONObject extends AbstractJSONData<JSONObject> implements Iterable<String> {
 
     protected Map<String, Object> objectMap = new HashMap<>();
 
@@ -19,6 +20,12 @@ public class JSONObject extends AbstractJSONData<JSONObject> {
         return this;
     }
 
+    public JSONObject putAll(Map<String, Object> map) {
+        Objects.requireNonNull(map, "Map must not be null or empty");
+        objectMap.putAll(map);
+        return this;
+    }
+
     public JSONObject remove(String key) {
         Objects.requireNonNull(key, "Key must not be null");
         objectMap.remove(key);
@@ -26,7 +33,11 @@ public class JSONObject extends AbstractJSONData<JSONObject> {
     }
 
     public boolean contains(String key) {
-        return objectMap.containsKey(key);
+        return objectMap.get(key) != null;
     }
 
+    @Override
+    public Iterator<String> iterator() {
+        return new JSONIterator<>(objectMap.keySet().iterator());
+    }
 }
