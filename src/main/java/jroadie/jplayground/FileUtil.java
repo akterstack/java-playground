@@ -1,4 +1,4 @@
-package im.jroadie.javaplayground;
+package jroadie.jplayground;
 
 import java.io.File;
 import java.io.FileInputStream;
