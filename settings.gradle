@@ -1,2 +1,10 @@
 rootProject.name = 'java-playground'
 
+def root = 'modules',
+    includes = [
+            lambda: root
+    ]
+includes.each { module, parent ->
+    include(":$module")
+    project(":$module").projectDir = file("$parent/$module")
+}

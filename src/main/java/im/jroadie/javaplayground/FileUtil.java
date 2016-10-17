@@ -14,6 +14,7 @@ public class FileUtil {
         unzip("/home/so/Downloads/Chrome/abc.zip", "/home/so/Downloads/Chrome/extracted/abc.zip");
         unzip("/home/so/Downloads/Chrome/no-bg-image-anik.zip", "/home/so/Downloads/Chrome/extracted/no-bg-image-anik.zip");
         unzip("/home/so/Downloads/Chrome/branding_new.zip", "/home/so/Downloads/Chrome/extracted/branding_new.zip");
+        unzip("/home/so/Downloads/Chrome/groovy-client-generated.zip", "/home/so/Downloads/Chrome/extracted/groovy-client-generated.zip");
     }
 
     /**
@@ -26,7 +27,7 @@ public class FileUtil {
         if(!source.endsWith(".zip"))
             throw new IllegalArgumentException(source.substring(source.lastIndexOf("/" + 1)) + " is zip file");
 
-        String filename = source.substring(source.lastIndexOf("/") + 1);
+        String filename = source.substring(source.lastIndexOf("/") + 1, source.lastIndexOf(".zip"));
         File destFolder = new File(destination == null ? source.substring(0, source.lastIndexOf("/")) : destination);
         try {
             ZipInputStream zis = new ZipInputStream(new FileInputStream(source));
