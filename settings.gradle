@@ -1,5 +1,6 @@
 rootProject.name = 'java-playground'
 include 'jsondata'
+include 'hackerrank'
 
 def root = 'modules',
     includes = [
