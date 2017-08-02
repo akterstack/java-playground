@@ -7,19 +7,19 @@ public class Solution {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
 
         Scanner scanner = new Scanner(System.in);
-        int dim = scanner.nextInt();
-        int[][] matrix = new int[dim][dim];
-        for (int i = 0; i < dim; i++) {
-            for (int j = 0; j < dim; j++) {
-                matrix[i][j] = scanner.nextInt();
-            }
+        int size = scanner.nextInt();
+        int len = size, el, pos = 0, neg = 0, zro = 0;
+        while (size > 0) {
+            el = scanner.nextInt();
+            if (el > 0) pos++;
+            else if (el < 0) neg++;
+            else zro++;
+            size--;
         }
-        int a = 0, b = 0;
-        for (int i = 0, j = 0, k = dim -1; i < dim; i++, j++, k--) {
-            a += matrix[i][j];
-            b += matrix[i][k];
-        }
-        System.out.println(Math.abs(a - b));
+        String precision = "%.6f\n";
+        System.out.printf(precision, (double)pos / (double)len);
+        System.out.printf(precision, (double)neg / (double)len);
+        System.out.printf(precision, (double)zro / (double)len);
     }
 
-}//
+}
