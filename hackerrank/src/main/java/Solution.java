@@ -22,4 +22,4 @@ public class Solution {
         System.out.println(Math.abs(a - b));
     }
 
-}
+}//
