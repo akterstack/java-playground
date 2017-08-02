@@ -6,27 +6,22 @@ import java.util.regex.*;
 
 public class Solution {
 
-    static int birthdayCakeCandles(int n, int[] ar) {
-        int count = 0, tallest = Integer.MIN_VALUE;
-        for (int height : ar) {
-            if(height > tallest) {
-                tallest = height;
-                count = 1;
-            } else if (height == tallest) {
-                count++;
-            }
+    static String timeConversion(String s) {
+        String result = s.substring(0, s.length() - 2);
+        String[] slop = result.split(":");
+        int hh = Integer.valueOf(slop[0]);
+        if(s.contains("AM")) {
+            slop[0] = hh == 12 ? "00" : slop[0];
+        } else {
+            slop[0] = (hh == 12 ? hh : hh + 12) + "";
         }
-        return count;
+        return String.join(":", slop);
     }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        int[] ar = new int[n];
-        for(int ar_i = 0; ar_i < n; ar_i++){
-            ar[ar_i] = in.nextInt();
-        }
-        int result = birthdayCakeCandles(n, ar);
+        String s = in.next();
+        String result = timeConversion(s);
         System.out.println(result);
     }
 }
