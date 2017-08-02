@@ -1,0 +1,10 @@
+.*
+build
+target
+output
+node_modules
+bower_components
+!.gitignore
+!.travis.yml
+*.iml
+*.ipr
