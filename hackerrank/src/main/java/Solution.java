@@ -7,19 +7,18 @@ public class Solution {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
 
         Scanner scanner = new Scanner(System.in);
-        int size = scanner.nextInt();
-        int len = size, el, pos = 0, neg = 0, zro = 0;
-        while (size > 0) {
-            el = scanner.nextInt();
-            if (el > 0) pos++;
-            else if (el < 0) neg++;
-            else zro++;
-            size--;
+        int size = scanner.nextInt(), pad = size - 1, hash = size - pad;
+        while (pad >= 0) {
+            for (int p = pad; p > 0; p--) {
+                System.out.print(" ");
+            }
+            for (int h = 0; h < hash; h++) {
+                System.out.print("#");
+            }
+            System.out.println();
+            pad--;
+            hash++;
         }
-        String precision = "%.6f\n";
-        System.out.printf(precision, (double)pos / (double)len);
-        System.out.printf(precision, (double)neg / (double)len);
-        System.out.printf(precision, (double)zro / (double)len);
     }
 
 }
