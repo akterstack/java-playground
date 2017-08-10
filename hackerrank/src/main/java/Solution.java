@@ -6,22 +6,22 @@ import java.util.regex.*;
 
 public class Solution {
 
-    static String timeConversion(String s) {
-        String result = s.substring(0, s.length() - 2);
-        String[] slop = result.split(":");
-        int hh = Integer.valueOf(slop[0]);
-        if(s.contains("AM")) {
-            slop[0] = hh == 12 ? "00" : slop[0];
-        } else {
-            slop[0] = (hh == 12 ? hh : hh + 12) + "";
-        }
-        return String.join(":", slop);
-    }
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String s = in.next();
-        String result = timeConversion(s);
-        System.out.println(result);
+        int n = in.nextInt();
+        String[] unsorted = new String[n];
+        for (int unsorted_i = 0; unsorted_i < n; unsorted_i++) {
+            unsorted[unsorted_i] = in.next();
+        }
+        // your code goes here
+        Arrays.sort(unsorted, (a, b) -> {
+            if(a.length() != b.length()) return a.length() - b.length();
+            for (int i = 0; i < a.length(); i++) {
+                int diff = a.charAt(i) - b.charAt(i);
+                if(diff != 0) return diff;
+            }
+            return 0;
+        });
+        System.out.println(String.join("\n", unsorted));
     }
 }
