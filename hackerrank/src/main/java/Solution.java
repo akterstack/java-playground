@@ -1,25 +1,59 @@
-import java.io.*;
-import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Solution {
     public static void main(String args[] ) throws Exception {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT */
         Scanner scanner = new Scanner(System.in);
-        int s = 0, r = 0, o = 0;
-        do {
-            String input = scanner.nextLine();
-            String[] lines = input.split(" ");
-            String a = lines[0];
-            String b = lines[1];
-            String c = lines[2];
-            String d = lines[3];
-            if( a.equals(b) && b.equals(c) && c.equals(d) && d.equals(a)) s++;
-            else if (a.equals(c) && b.equals(d)) r++;
-            else o++;
-        } while (scanner.hasNextLine());
-        System.out.println(s + " " + r + " " + o);
+        String tagLine = scanner.nextLine();
+        int count = Integer.parseInt(scanner.nextLine());
+        Map<Integer, Hotel> hotels = new HashMap<>();
+        for (int i = 0; i < count; i++) {
+            Hotel hotel = new Hotel();
+            hotel.id = Integer.parseInt(scanner.nextLine());
+            hotel.reviews.add(scanner.nextLine());
+            hotels.put(hotel.id, hotel);
+        }
+
+        //Solution
+        String[] tags = tagLine.split(" ");
+        for (Hotel hotel : hotels.values()) {
+            for (String review : hotel.reviews) {
+                String[] words = review.split(" ");
+                for (int i = 0; i < words.length; i++) {
+                    words[i] = words[i].replace(".", "");
+                    words[i] = words[i].replace(",", "");
+                    for (String tag : tags) {
+                        if (tag.equalsIgnoreCase(words[i])) {
+                            hotel.star++;
+                        }
+                    }
+                }
+            }
+        }
+        Arrays.sort(hotels.values().toArray());
+        String res = "";
+        for (Hotel hotel : hotels.values()) {
+            res += hotel.id + " ";
+        }
+        System.out.println(res.substring(0, res.length() - 1));
+
+    }
+
+    static class Hotel implements Comparable<Hotel> {
+        int id;
+        List<String> reviews = new ArrayList<>();
+        int star = 0;
+
+
+        @Override
+        public int compareTo(Hotel source) {
+            if (star == source.star) return source.id - id;
+            return source.star - star;
+        }
     }
 }
