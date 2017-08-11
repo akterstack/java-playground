@@ -5,23 +5,21 @@ import java.math.*;
 import java.util.regex.*;
 
 public class Solution {
-
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        String[] unsorted = new String[n];
-        for (int unsorted_i = 0; unsorted_i < n; unsorted_i++) {
-            unsorted[unsorted_i] = in.next();
-        }
-        // your code goes here
-        Arrays.sort(unsorted, (a, b) -> {
-            if(a.length() != b.length()) return a.length() - b.length();
-            for (int i = 0; i < a.length(); i++) {
-                int diff = a.charAt(i) - b.charAt(i);
-                if(diff != 0) return diff;
-            }
-            return 0;
-        });
-        System.out.println(String.join("\n", unsorted));
+    public static void main(String args[] ) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+        Scanner scanner = new Scanner(System.in);
+        int s = 0, r = 0, o = 0;
+        do {
+            String input = scanner.nextLine();
+            String[] lines = input.split(" ");
+            String a = lines[0];
+            String b = lines[1];
+            String c = lines[2];
+            String d = lines[3];
+            if( a.equals(b) && b.equals(c) && c.equals(d) && d.equals(a)) s++;
+            else if (a.equals(c) && b.equals(d)) r++;
+            else o++;
+        } while (scanner.hasNextLine());
+        System.out.println(s + " " + r + " " + o);
     }
 }
